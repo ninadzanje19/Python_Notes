@@ -1,0 +1,99 @@
+Perceptron has an input and an output with a function that processes them
+Input is x
+Output is y
+
+w is the weight that can be tweaked so as to change the outcome.
+This is used to train our Neural Network.
+
+b is the bias term.
+The value of xw > b so as to have an effect on the output
+
+y = f(x)
+y = (x1w1 + b) + (x2w2 + b)
+
+y = (x1w1 + b1) + (x2w2 + b2) + ........ + (xnwn + bn)
+
+
+A collection of perceptrons is called as Neural Network.
+The first layer is the Input Layer,
+The last layer is the Output Layer.
+All the layers in between are Hidden layers.
+
+
+
+The height of a Neural Network is determined by its number of inputs.
+The width of teh Neural Networks is determined by its number of Hidden Layers.
+A Neural Network is called as deep Neural Network if it has 2 or more Hidden Layers.
+
+
+
+The wikipedia page for Activation Function contains info on various Activation Functions, their equations, graphs and derivatives.   https://en.wikipedia.org/wiki/Activation_function
+Common ones include Rectified Linear Unit, Sigmoid Function, Hyperbolic functions etc.
+Activation Functions make sense for single output.
+
+
+
+Non-Exclusive Classes
+A data point can have multiple classes / categories assigned to it.
+Eg: Multiple tags on a photo
+
+Mutually Exclusive Classes
+A data point can have only one class to it from a range of multiple classes.
+Eg: A photo can ne either in colour or in greyscale.
+
+One Hot Encoding for Data Points
+Denoting class with 1 if the data point has it, else 0. All this is in a matrix format.
+
+One Hot Encoding (Non-Exclusive Class)
+DP1     A,B
+DP2     A
+DP3     C,B
+
+        A   B   C
+DP1     1   1   0
+DP2     1   0   0
+DP3     0   1   1
+
+
+One Hot Encoding (Mutually Exclusive Class)
+DP1     A
+DP2     B
+DP3     C
+
+        A   B   C
+DP1     1   0   0
+DP2     0   1   0
+DP3     0   0   1
+
+Each Layer has an Activation Function to it that determines the output which acts as an input to the next layer.
+
+Epoch in Neural Network is an iteration that the network performs during its learning.
+
+Cost Functions (Loss Functions) are the functions which monitor the training performance i.e. they are the functions which evaluate how far is the output of our Neural Network wrt the expected output.
+
+A very common cost function is the Quadratic cost function which is very similar to Root Mean Squared Error.
+
+C(W, B, S, E)
+C = Cost Function
+W = Weights
+B = Bias
+S = The output we get
+E = Expected output
+
+W and B are not directly calculated in the Cost Function.
+z = w*x + b
+S = Activation_Function(z)
+Cost Function = Quadratic_Cost_Function(S, E)
+
+The Cost Function is a function therefore it has a graph. Since the Cost Function tells us the difference between the calculated value and the expected value minimizing it means we get the amount of error as 0.
+For calculating the value where the answer would be 0 can be found out by taking its derivative and solving for 0.
+Since the equation of the function contains multiple variables calculating its derivative and solving for 0 requires tremendous computing power.
+
+Gradient Descent
+So we calculate it for specific values which are seperated at specific intervals.
+If the step size is small it will compute slowly but the result will be close to accurate.
+If the step size is large it will compute fast but the answer will be far from accurate.
+
+
+
+

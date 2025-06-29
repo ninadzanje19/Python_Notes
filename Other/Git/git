@@ -1,0 +1,203 @@
+git --version
+#Get git version
+
+3 levels of systems
+|->System (Settings for all users)
+|->Global (Settings for all repos of current user)
+|->Local  (Settings for only current repo)
+
+#Configure the settings
+git config --<level> user.name "Ninad Zanje"
+git config --<level> user.email "ninadzanje@gmail.com"
+
+#Edit git configurations
+git config --<level> -e
+
+#Avoid Windows * Mac * Linux integrations issues
+git config --<level> core.autocrlf true
+
+#Get full help of git config
+git config --help
+
+#Get summarised help of git config
+git config --h
+
+
+
+##########################################################################################################
+                                                WORKING OF GIT
+##########################################################################################################
+3 places of code
+1. Your code
+2. Staging area
+3. Repository
+
+1. You write code on your machine
+2. You add the snapshots to (state of the code) to the staging area
+3. You commit it and push it to the Repository
+
+#Initializes git in the current directory, a .git hidden file appears in the directory
+git init
+
+#Check the status of the staging area
+git status
+
+#Add files to the staging area
+git add <file_name>
+
+#Add files with file extension to the staging area
+git add *.<file_extension>
+
+#Add all files to the staging area
+git add .
+
+
+**********************************************************************************************************
+Files in the staging area are denoted by green colour.
+Files with changes are denoted by red colour.
+
+Files added to the staging area are tracked by git for any potential changes in them
+**********************************************************************************************************
+
+#Commit the files from the staging area to the repo and give a message
+git commit -m "Commit Message"
+
+#Commit the changes directly to the repo without giving it to the staging area
+git commit -a -m "Commit Message"
+git commit -am "Commit Message"
+
+#Lists all the files from the staging area
+git ls-files
+
+
+**********************************************************************************************************
+Once you add files to the staging area it gets saved there.
+Even of you make changes like deleting a file.
+You have to again add the changed files to the staging area so that it overwrites the staging area
+**********************************************************************************************************
+
+#Remove the file from staging area and the current working dir
+git rm <file_name>
+
+#Remove the all the files with file_extension from staging area and the current working dir
+git rm *.<file_extension>
+
+#Remove all the files from staging area and the current working dir
+git rm .
+
+#Rename the file1_name to file2_name
+git mv <file1_name> <file2_name>
+
+**********************************************************************************************************
+Create a file .gitignore in the root of current working dir.
+Add the paths of dirs to be ignored by git while adding to staging area as well as the repo.
+If the file is added first to the repo and then to .gitignore it wont be ignored
+
+Check https://github.com/github/gitignore for various programming language templates for .gitignore
+For Python check https://github.com/github/gitignore/blob/main/Python.gitignore
+**********************************************************************************************************
+
+#Get short status
+git status -s
+
+**********************************************************************************************************
+The left column shows the file status in the staging area
+The right column shows the file status in the current working dir
+Abbreviations used are -
+M:  Modified
+A:  Added
+D:  Deleted
+R:  Renamed
+??: Not in staging area
+**********************************************************************************************************
+
+#See the exact changes in the staging area
+git diff --staged
+
+#See the exact changes in the working area
+git diff
+
+**********************************************************************************************************
+Use diff tools for better viewing of changes
+**********************************************************************************************************
+
+#See all the list of all the commits (latest commit first)
+git log
+
+#See all the summarised list of all the commits
+git log --oneline
+
+#See all the list of all the commits (initial commit first)
+git log --reverse
+
+**********************************************************************************************************
+Each commit has an id associated with it.
+When showing commits HEAD refers to the current branch.
+**********************************************************************************************************
+
+#Show a particular commit
+git show <commit_id>
+
+#Show the latest commit
+git show HEAD
+
+#Show the commit number <number> from latest first
+git show HEAD~<number>
+
+#Restore a file_name back to its old state
+git restore --staged <file_name>
+
+#Restore all the files with file_extension back to its old state
+git restore --staged *.<file_extension>
+
+#Restore all the files back to its old state
+git restore --staged .
+
+
+##########################################################################################################
+                                                WORKING OF GITHUB
+##########################################################################################################
+
+Repos are of 2 types.
+1. Local Repo (Stored on your machine)
+2. Remote Repo (Stored on server like Github)
+
+Github is a collection of many git repos
+
+You can create a repo on your local machine and then send it (push) to Github.
+You can take a repo on your local machine (pull) from Github.
+
+Here git repo corresponds to the git repo we have on our local machine. It has all our commits data.
+
+#Copy an external Git repo to your current working dir
+git clone <git_repo_url>
+
+#Connect the current working dir to some remote (not on this machine) repo
+git remote add origin <git_repo_url>
+
+#Show all the connected repos to the current working dir
+git remote -v
+
+#Push the git repo to branch_name. -u signifies upstream, it makes the branch_name as default place for all future pushes
+git push -u origin <branch_name>
+
+#Push the git repo to the
+git push
+
+#View the current branch
+git branch
+
+#Change the current branch to <branch_name>
+git branch -M <branch_name>
+
+#Create a new branch by the name branch_name
+git branch <branch_name>
+
+#Switch the branch to <branch_name>
+git checkout <branch_name>
+
+#Create and switch to <branch_name>
+git checkout -b <branch_name>
+
+#Pull the changes from the remote repo to local repo
+git pull

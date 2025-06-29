@@ -1,0 +1,8 @@
+*.pyc
+
+.env
+.venv/
+.idea/
+.git/
+
+sandbox.py
