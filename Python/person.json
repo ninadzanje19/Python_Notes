@@ -1,0 +1,9 @@
+{
+    "name": "Ninad",
+    "age": 25,
+    "city": "Mumbai",
+    "hobbies": [
+        "Cycling",
+        "Swimming"
+    ]
+}

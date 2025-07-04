@@ -5,4 +5,5 @@
 .idea/
 .git/
 
+/Artificial_Intelligence/Gen_AI/VectorDB/ChromaDB/Chroma_Database
 sandbox.py
