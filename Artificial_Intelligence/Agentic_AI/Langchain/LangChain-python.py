@@ -11,7 +11,7 @@
 """
 
 ########################################################################################################################
-#                               Langchain Overview
+#                                   Langchain Overview
 ########################################################################################################################
 #pip install -U langchain-google-genai
 #For Google Gemini only
@@ -214,5 +214,88 @@ parallel_chain = summarize_prompt | llm_gemini | output_parser | parallel_runnab
 response_parallel = parallel_chain.invoke({"context": "What is Langchain?"})
 
 ########################################################################################################################
-#                        Splitters and Retrievers
+#                           Splitters and Retrievers
+########################################################################################################################
+from langchain_community.document_loaders import TextLoader
+
+loader = TextLoader("knowledge_base.txt", encoding='utf-8')
+docs = loader.load()
+
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=100,                                 #Each chunk is of max this much chars
+                chunk_overlap=20,                               #Consecutive chunks will share this much chars to maintain context
+                length_function=len,
+                is_separator_regex=False                        #separators used for splitting are treated as plain strs (\n)
+                )
+
+docs_split = text_splitter.split_documents(docs)
+
+#Checkout various loaders at https://python.langchain.com/docs/integrations/document_loaders/
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+from langchain_huggingface import HuggingFaceEmbeddings
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+
+#Checkout various embedding models at https://python.langchain.com/docs/integrations/text_embedding/
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+from langchain_community.vectorstores.inmemory import InMemoryVectorStore
+vector_store = InMemoryVectorStore.from_documents(
+    docs_split,
+    embeddings,
+)
+
+response_retriever = vector_store.similarity_search(query="What animals are found in the Savannah", k= 4)
+#Checkout various vector stores at https://python.langchain.com/docs/integrations/vectorstores/
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+########################################################################################################################
+#                           RAG(Retrieval Argument Generation)
+########################################################################################################################
+
+
+########################################################################################################################
+#                                               Tools
+########################################################################################################################
+
+"""Duck Duck Go search"""
+from langchain_community.tools import DuckDuckGoSearchRun
+
+search = DuckDuckGoSearchRun()
+
+response_tools = search.invoke("Tell me about Langchain")
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""Serp Search"""
+from langchain_community.utilities import SerpAPIWrapper
+from constants import serp_api_key
+
+
+params = {
+    "engine": "google",
+    "gl": "in",
+    "hl": "en",
+}
+serp_search = SerpAPIWrapper(serpapi_api_key=serp_api_key,params=params)
+#response_tools = serp_search.run("Tell me about Langchain")
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""Serper Search (Paid)"""
+from constants import serper_api_key
+import os
+os.environ["SERPER_API_KEY"] = serper_api_key
+from langchain_community.utilities import GoogleSerperAPIWrapper
+
+serper_search = GoogleSerperAPIWrapper()
+#response_tools = serper_search.run("Tell me about Langchain")
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""Brave Search"""
+from langchain_community.tools import BraveSearch
+from constants import brave_api_key
+
+tool = BraveSearch.from_api_key(api_key=brave_api_key, search_kwargs={"count": 3})
+#response_tools = tool.run("Tell me about Langchain")
+
+#Checkout various tools at https://python.langchain.com/docs/integrations/tools/
+########################################################################################################################
+#                                               Agents
 ########################################################################################################################
