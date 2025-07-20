@@ -50,7 +50,7 @@ from langchain_community.document_loaders import csv_loader
 loader = csv_loader.CSVLoader("data/random_data.csv")
 docs = loader.load()
 
-#Setup a chain using document loaders and llm
+#Set up a chain using document loaders and llm
 prompt_template = """You are a helpful assistant that explains CSV files. Given the following csv transcript:
                      {csv_transcript}
                      Give a summary."""

@@ -23,7 +23,8 @@ RunnableParallel: Executes the multiple Runnable components concurrently. Allows
 
 from constants import gemini_api_key
 from langchain_google_genai import ChatGoogleGenerativeAI
-llm_gemini = ChatGoogleGenerativeAI()
+llm_gemini = ChatGoogleGenerativeAI(model="gemini-2.0-flash",
+                                    api_key=gemini_api_key)
 from langchain.prompts import PromptTemplate
 
 #Standard process for creating a prompt
