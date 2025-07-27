@@ -2,9 +2,11 @@
 #                                               Agents
 ########################################################################################################################
 """
-Chain is a fixed sequence of runnables (components).
-Agents are dynamic, the llms decide what runnable to use next determining the sequence.
+Chain is a static and pre-defined sequence of runnables (components).
+Agent is something which is flexible, dynamic something which allows us to perform more complex tasks.
+In an agent the LLM can take decisions on its own.
 """
+
 
 #Configure a tool
 from langchain_community.tools import WikipediaQueryRun
