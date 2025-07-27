@@ -6,6 +6,6 @@
 .git/
 
 /Artificial_Intelligence/Gen_AI/VectorDB/ChromaDB/Chroma_Database
-/Artificial_Intelligence/Agentic_AI/LangChain/chroma_langchain_db
-/Artificial_Intelligence/Agentic_AI/LangChain/rag_chroma_langchain_db
+/Artificial_Intelligence/Agentic_AI/LangChain/vector_db/chroma_langchain_db
+/Artificial_Intelligence/Agentic_AI/LangChain/vector_db/rag_chroma_langchain_db
 sandbox.py

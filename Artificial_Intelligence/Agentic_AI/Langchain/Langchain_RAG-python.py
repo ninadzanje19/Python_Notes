@@ -44,7 +44,7 @@ from langchain_chroma import Chroma
 vector_store = Chroma(
     collection_name="example_collection",
     embedding_function=embeddings,
-    persist_directory="./rag_chroma_langchain_db"
+    persist_directory="./vector_db/rag_chroma_langchain_db"
 )
 
 ids_of_docs = []
