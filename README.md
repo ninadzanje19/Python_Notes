@@ -1,7 +1,14 @@
 # Python_Notes
 My Python Notes
 
-API Keys required
+
+Python version:
+python 3.12.7
+
+Cuda Version:
+Cuda 12.8
+
+API Keys required:
 
 1. LLM API KEYS
    1. GOOGLE_API_KEY
