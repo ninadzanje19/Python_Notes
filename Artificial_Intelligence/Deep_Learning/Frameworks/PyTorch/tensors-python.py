@@ -1,6 +1,6 @@
 """Everything in PyTorch is built around the torch.Tensor.
 Think of it as the PyTorch equivalent of a NumPy array.
-It's a multi-dimensional grid of numbers."""
+It's a multidimensional grid of numbers."""
 
 import torch
 

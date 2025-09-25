@@ -13,10 +13,10 @@ data = pd.read_csv("fake_reg.csv")
 df = pd.DataFrame(data)
 
 x = df[['price', 'feature1']].values                            #What we take into consideration while we predict
-y = df[['feature2']].values                                             #What we predict
+y = df[['feature2']].values                                     #What we predict
 
 
-scaler = StandardScaler()                                            #Scale x to the values of y
+scaler = StandardScaler()                                       #Scale x to the values of y
 x_scaled = scaler.fit_transform(x)
 
 # Split data into training and testing sets
